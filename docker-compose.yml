@@ -1,0 +1,14 @@
+version: "2"
+services:
+  mongo:
+    image: "mongo:3.4"
+  api:
+    build: .
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 4000:4000
+    depends_on:
+      - mongo
+    command: sh start.sh
+    

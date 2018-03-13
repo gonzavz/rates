@@ -1,0 +1,40 @@
+{
+  "name": "rates",
+  "version": "1.0.0",
+  "description": "Rate a coworker skill on a technology",
+  "main": "",
+  "scripts": {
+    "start": "node src/",
+    "start-docker": "MONGO_URI='mongodb://mongo:27017/rates' node src/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gonzavz/rates.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gonzavz/rates/issues"
+  },
+  "directories": {
+    "test": "test/"
+  },
+  "engines": {
+    "node": "^8.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "homepage": "https://github.com/gonzavz/rates#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.1",
+    "lodash": "^4.17.5",
+    "mongoose": "^5.0.9"
+  },
+  "devDependencies": {
+    "eslint": "^4.18.2",
+    "eslint-config-google": "^0.9.1"
+  }
+}
