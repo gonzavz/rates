@@ -3,6 +3,7 @@ const graphqlHTTP = require('express-graphql');
 const bodyParser = require('body-parser');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const uri = process.env.MONGO_URI;
 const options = {}; // {autoIndex: false};
@@ -12,6 +13,8 @@ mongoose.connect(uri, options)
   .catch((error) => console.error(`Unable to connect to Mongo [${uri}] due to: ${error}`));
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json());
 
