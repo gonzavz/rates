@@ -1,8 +1,10 @@
 const graphql = require('graphql');
 const {GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLID} = graphql;
 const PersonType = require('./personType');
+const AuthType = require('./authType');
 const TechType = require('./techType');
 const models = require('../models');
+const authService = require('../services/auth');
 const _ = require('lodash');
 
 const mutation = new GraphQLObjectType({
@@ -65,6 +67,26 @@ const mutation = new GraphQLObjectType({
     args: {id: {type: GraphQLID}},
     resolve(parentValue, {id}) {
       return models.Tech.remove({_id: id});
+    },
+  },
+  register: {
+    type: AuthType,
+    args: {
+      username: {type: GraphQLString},
+      password: {type: GraphQLString},
+    },
+    resolve(parentValue, args) {
+      return authService.register(args);
+    },
+  },
+  login: {
+    type: AuthType,
+    args: {
+      username: {type: GraphQLString},
+      password: {type: GraphQLString},
+    },
+    resolve(parentValue, args) {
+      return authService.login(args);
     },
   },
   },
