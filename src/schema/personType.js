@@ -8,6 +8,7 @@ const PersonType = new GraphQLObjectType({
     name: {type: GraphQLString},
     surname: {type: GraphQLString},
     title: {type: GraphQLString},
+    username: {type: GraphQLString},
   }),
 });
 

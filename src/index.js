@@ -3,6 +3,8 @@ const graphqlHTTP = require('express-graphql');
 const bodyParser = require('body-parser');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const authService = require('./services/auth');
 
 const uri = process.env.MONGO_URI;
 const options = {}; // {autoIndex: false};
@@ -13,7 +15,11 @@ mongoose.connect(uri, options)
 
 const app = express();
 
+app.use(cors());
+
 app.use(bodyParser.json());
+
+app.use(authService.authenticate);
 
 app.use('/graphql', graphqlHTTP({
   schema,
