@@ -20,6 +20,9 @@ const authenticate = async (req, res, next) => {
 
 const login = async ({username, password}) => {
   const person = await models.Person.findOne({username});
+  if (person == null) {
+    throw new Error('Invalid Username/Password!');
+  }
   person.comparePassword(password)
   const token = jwt.sign({id: person.id}, SECRET, {expiresIn: '7d'})
   return {token, person}
