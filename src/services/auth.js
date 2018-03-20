@@ -29,9 +29,18 @@ const login = async ({username, password}) => {
 };
 
 const register = async ({username, password}) => {
-  const person = await models.Person.create({username, password});
-  const token = jwt.sign({id: person.id}, SECRET, {expiresIn: '7d'})
-  return {token, person}
+  await models.Person.init(); // avoid race conditions.
+  try {
+    const person = await models.Person.create({username, password});
+    const token = jwt.sign({id: person.id}, SECRET, {expiresIn: '7d'})
+    return {token, person}
+  } catch(error) {
+    if (error.message.indexOf('duplicate key error') !== -1) {
+      throw new Error(`${username} is already in use.`);
+    } else {
+      throw error;
+    }
+  }
 };
 
 module.exports = {
