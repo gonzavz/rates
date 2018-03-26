@@ -50,7 +50,8 @@ const mutation = new GraphQLObjectType({
       type: TechType,
       args: {
         name: {type: GraphQLString},
-        use: {type: new GraphQLList(GraphQLString)},
+        description: {type: GraphQLString},
+        apply: {type: new GraphQLList(GraphQLString)},
       },
       resolve(parentValue, {name, use}) {
         return (new models.Tech({name, use})).save();
@@ -61,7 +62,8 @@ const mutation = new GraphQLObjectType({
     args: {
       id: {type: new GraphQLNonNull(GraphQLID)},
       name: {type: GraphQLString},
-      use: {type: new GraphQLList(GraphQLString)},
+      description: {type: GraphQLString},
+      apply: {type: new GraphQLList(GraphQLString)},
     },
     resolve(parentValue, {name, use, id}) {
       const $set = _.pickBy({name, use}, _.identity);

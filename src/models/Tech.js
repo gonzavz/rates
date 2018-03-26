@@ -2,13 +2,25 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const validUses = [
   'devops',
-  'develop',
+  'management',
   'ui',
   'ux',
   'management',
   'frontend',
   'backend',
   'database',
+  'mobile',
+  'webmobile',
+];
+
+const validTypes = [
+  'language',
+  'framework',
+  'vcs',
+  'message_broker',
+  'in_memory_db',
+  'db',
+  'app',
 ];
 
 const TechSchema = new Schema({
@@ -16,7 +28,14 @@ const TechSchema = new Schema({
       type: String,
       unique: true,
     },
-    use: [{
+    description: {
+      type: String,
+    },
+    type: {
+      type: Schema.Types.String,
+      enum: validTypes,
+    },
+    apply: [{
       type: Schema.Types.String,
       enum: validUses,
     }],

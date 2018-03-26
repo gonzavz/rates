@@ -6,7 +6,8 @@ const TechType = new GraphQLObjectType({
   fields: () => ({
     id: {type: GraphQLID},
     name: {type: GraphQLString},
-    use: {type: new GraphQLList(GraphQLString)},
+    description: {type: GraphQLString},
+    apply: {type: new GraphQLList(GraphQLString)},
   }),
 });
 
